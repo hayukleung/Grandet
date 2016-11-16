@@ -6,8 +6,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Build;
+import android.support.annotation.UiThread;
 import android.util.AttributeSet;
 import android.view.View;
+import java.util.Stack;
 
 /**
  * Grandet
@@ -21,7 +23,7 @@ import android.view.View;
 /**
  * PIN Code 输入框
  */
-public class Password extends View {
+public class Password extends View implements Key {
 
   private int mUnitSize;
   private Paint mPaint;
@@ -29,6 +31,9 @@ public class Password extends View {
   private RectF mRectF2;
   private RectF mRectF3;
   private RectF mRectF4;
+
+  private Stack<String> mPassword = new Stack<>();
+  private PasswordHelper mPasswordHelper;
 
   public Password(Context context) {
     this(context, null);
@@ -65,6 +70,18 @@ public class Password extends View {
         break;
     }
     return result;
+  }
+
+  /**
+   * 清除密码
+   */
+  public void clear() {
+    mPassword.clear();
+    invalidate();
+  }
+
+  public void setPasswordHelper(PasswordHelper passwordHelper) {
+    mPasswordHelper = passwordHelper;
   }
 
   private void init() {
@@ -124,5 +141,139 @@ public class Password extends View {
       }
       canvas.drawRoundRect(mRectF4, mUnitSize * 0.1f, mUnitSize * 0.1f, mPaint);
     }
+
+    mPaint.setColor(Color.argb(0xff, 0x00, 0x00, 0x00));
+    mPaint.setStyle(Paint.Style.FILL);
+
+    switch (mPassword.size()) {
+      case 0: {
+        break;
+      }
+      case 1: {
+        canvas.drawCircle(mUnitSize * 0.5f, mUnitSize * 0.5f, dp2px(10), mPaint);
+        break;
+      }
+      case 2: {
+        canvas.drawCircle(mUnitSize * 0.5f, mUnitSize * 0.5f, dp2px(10), mPaint);
+        canvas.drawCircle(mUnitSize * 1.4f, mUnitSize * 0.5f, dp2px(10), mPaint);
+        break;
+      }
+      case 3: {
+        canvas.drawCircle(mUnitSize * 0.5f, mUnitSize * 0.5f, dp2px(10), mPaint);
+        canvas.drawCircle(mUnitSize * 1.4f, mUnitSize * 0.5f, dp2px(10), mPaint);
+        canvas.drawCircle(mUnitSize * 2.3f, mUnitSize * 0.5f, dp2px(10), mPaint);
+        break;
+      }
+      case 4: {
+        canvas.drawCircle(mUnitSize * 0.5f, mUnitSize * 0.5f, dp2px(10), mPaint);
+        canvas.drawCircle(mUnitSize * 1.4f, mUnitSize * 0.5f, dp2px(10), mPaint);
+        canvas.drawCircle(mUnitSize * 2.3f, mUnitSize * 0.5f, dp2px(10), mPaint);
+        canvas.drawCircle(mUnitSize * 3.2f, mUnitSize * 0.5f, dp2px(10), mPaint);
+        break;
+      }
+      default: {
+        throw new RuntimeException("Password Length Exception.");
+      }
+    }
+  }
+
+  public void acceptCode(int key) {
+
+    if (4 == mPassword.size()) {
+      return;
+    }
+
+    switch (key) {
+      case KEY_0: {
+        mPassword.push("0");
+        break;
+      }
+      case KEY_1: {
+        mPassword.push("1");
+        break;
+      }
+      case KEY_2: {
+        mPassword.push("2");
+        break;
+      }
+      case KEY_3: {
+        mPassword.push("3");
+        break;
+      }
+      case KEY_4: {
+        mPassword.push("4");
+        break;
+      }
+      case KEY_5: {
+        mPassword.push("5");
+        break;
+      }
+      case KEY_6: {
+        mPassword.push("6");
+        break;
+      }
+      case KEY_7: {
+        mPassword.push("7");
+        break;
+      }
+      case KEY_8: {
+        mPassword.push("8");
+        break;
+      }
+      case KEY_9: {
+        mPassword.push("9");
+        break;
+      }
+      case KEY_DOT: {
+        break;
+      }
+      case KEY_DEL: {
+        if (0 < mPassword.size()) {
+          mPassword.pop();
+        }
+        break;
+      }
+      case KEY_ENTER: {
+        break;
+      }
+      case KEY_INVALID:
+      default: {
+
+        break;
+      }
+    }
+
+    invalidate();
+
+    postDelayed(new Runnable() {
+      @Override public void run() {
+        if (4 == mPassword.size()) {
+          // 密码录入完成
+          if (null != mPasswordHelper) {
+
+            String p4 = mPassword.pop();
+            String p3 = mPassword.pop();
+            String p2 = mPassword.pop();
+            String p1 = mPassword.pop();
+
+            mPasswordHelper.onPasswordTyped(p1 + p2 + p3 + p4);
+          }
+        }
+      }
+    }, 200);
+  }
+
+  /**
+   * 根据设备屏幕密度将dp转换为px
+   *
+   * @param valueDp
+   * @return
+   */
+  public int dp2px(float valueDp) {
+    return (int) (valueDp * getResources().getDisplayMetrics().density + 0.5f);
+  }
+
+  public static interface PasswordHelper {
+    @UiThread void onPasswordTyped(String password);
   }
 }

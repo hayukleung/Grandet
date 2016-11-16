@@ -20,9 +20,8 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity
-        android:name=".ui.SettingPasswordActivity"
-        android:theme="@style/FullscreenTheme"/>
+    <activity android:name=".ui.SettingPasswordActivity"/>
+    <activity android:name=".ui.AccountingActivity"/>
   </application>
 
 </manifest>

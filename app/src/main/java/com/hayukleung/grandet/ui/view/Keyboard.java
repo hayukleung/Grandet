@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -19,22 +18,7 @@ import android.view.View;
  * at 2016-11-15 18:57
  */
 
-public class Keyboard extends View {
-
-  public static final int KEY_INVALID = -1;
-  public static final int KEY_0 = 0;
-  public static final int KEY_1 = 1;
-  public static final int KEY_2 = 2;
-  public static final int KEY_3 = 3;
-  public static final int KEY_4 = 4;
-  public static final int KEY_5 = 5;
-  public static final int KEY_6 = 6;
-  public static final int KEY_7 = 7;
-  public static final int KEY_8 = 8;
-  public static final int KEY_9 = 9;
-  public static final int KEY_DOT = 10;
-  public static final int KEY_DEL = 11;
-  public static final int KEY_ENTER = 12;
+public class Keyboard extends View implements Key {
 
   private Rect mRect0, mRect1, mRect2, mRect3, mRect4, mRect5, mRect6, mRect7, mRect8, mRect9,
       mRectDot, mRectDel, mRectEnter;
@@ -276,11 +260,11 @@ public class Keyboard extends View {
     px = ((int) event.getX()) / mUnitWidth;
     py = ((int) event.getY()) / mUnitHeight;
 
-    Log.e("", "eX --> " + event.getX());
-    Log.e("", "eY --> " + event.getY());
-    Log.e("", "pX --> " + px);
-    Log.e("", "pY --> " + py);
-    Log.e("", "");
+    // Log.e("", "eX --> " + event.getX());
+    // Log.e("", "eY --> " + event.getY());
+    // Log.e("", "pX --> " + px);
+    // Log.e("", "pY --> " + py);
+    // Log.e("", "");
 
     switch (px) {
       case 0: {

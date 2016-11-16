@@ -2,22 +2,11 @@
   <string name="app_name">Grandet</string>
 
   <!--pin code-->
-  <string name="pin_code_setup_first">Setup your own pin-code first.</string>
+  <string name="pin_code_setup_first">SETUP YOUR OWN PIN-CODE.</string>
+  <string name="pin_code_setup_again">RETYPE YOUR PIN-CODE AGAIN.</string>
+  <string name="pin_code_setup_error">PIN-CODES ARE DIFFERENT, RETYPE AGAIN.</string>
 
   <string name="dummy_button">Dummy Button</string>
   <string name="dummy_content">DUMMY\nCONTENT</string>
 
-  <string name="key_0">0</string>
-  <string name="key_1">1</string>
-  <string name="key_2">2</string>
-  <string name="key_3">3</string>
-  <string name="key_4">4</string>
-  <string name="key_5">5</string>
-  <string name="key_6">6</string>
-  <string name="key_7">7</string>
-  <string name="key_8">8</string>
-  <string name="key_9">9</string>
-  <string name="key_dot">.</string>
-  <string name="key_del">back</string>
-  <string name="key_enter">done</string>
 </resources>
