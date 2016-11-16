@@ -2,6 +2,7 @@ package com.hayukleung.grandet.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.widget.Button;
 
 /**
@@ -34,7 +35,8 @@ public class KeyboardButton extends Button {
   }
 
   private void init() {
-
+    setGravity(Gravity.CENTER);
+    setPadding(0, 10, 0, 10);
   }
 
   private static class Config {

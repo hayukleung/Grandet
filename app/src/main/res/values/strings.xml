@@ -1,6 +1,9 @@
 <resources>
   <string name="app_name">Grandet</string>
 
+  <!--pin code-->
+  <string name="pin_code_setup_first">Setup your own pin-code first.</string>
+
   <string name="dummy_button">Dummy Button</string>
   <string name="dummy_content">DUMMY\nCONTENT</string>
 
@@ -14,7 +17,7 @@
   <string name="key_7">7</string>
   <string name="key_8">8</string>
   <string name="key_9">9</string>
-  <string name="key_dot">·</string>
-  <string name="key_del">×</string>
+  <string name="key_dot">.</string>
+  <string name="key_del">back</string>
   <string name="key_enter">done</string>
 </resources>
