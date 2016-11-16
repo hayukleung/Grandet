@@ -2,9 +2,18 @@
   <string name="app_name">Grandet</string>
 
   <!--pin code-->
-  <string name="pin_code_setup_first">SETUP YOUR OWN PIN-CODE.</string>
+  <string name="pin_code_setup_first">TYPE YOUR OWN PIN-CODE.</string>
   <string name="pin_code_setup_again">RETYPE YOUR PIN-CODE AGAIN.</string>
   <string name="pin_code_setup_error">PIN-CODES ARE DIFFERENT, RETYPE AGAIN.</string>
+  <string name="pin_code_request">TYPE YOUR PIN-CODE.</string>
+  <string name="pin_code_error">PIN-CODE ERROR.</string>
+
+  <!--setting-->
+  <string name="setting_modify_pin_code">MODIFY PIN-CODE</string>
+
+  <!--record-->
+  <string name="record_income">收入</string>
+  <string name="record_outcome">支出</string>
 
   <string name="dummy_button">Dummy Button</string>
   <string name="dummy_content">DUMMY\nCONTENT</string>

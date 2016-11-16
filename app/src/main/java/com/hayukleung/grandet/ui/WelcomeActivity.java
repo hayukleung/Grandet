@@ -33,19 +33,6 @@ public class WelcomeActivity extends BaseActivity {
    */
   private static final int UI_ANIMATION_DELAY = 300;
   private final Handler mHideHandler = new Handler();
-  /**
-   * Touch listener to use for in-layout UI controls to delay hiding the
-   * system UI. This is to prevent the jarring behavior of controls going away
-   * while interacting with activity UI.
-   */
-  private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-    @Override public boolean onTouch(View view, MotionEvent motionEvent) {
-      if (AUTO_HIDE) {
-        delayedHide(AUTO_HIDE_DELAY_MILLIS);
-      }
-      return false;
-    }
-  };
   private View mContentView;
   private final Runnable mHidePart2Runnable = new Runnable() {
     @SuppressLint("InlinedApi") @Override public void run() {
@@ -77,6 +64,19 @@ public class WelcomeActivity extends BaseActivity {
   private final Runnable mHideRunnable = new Runnable() {
     @Override public void run() {
       hide();
+    }
+  };
+  /**
+   * Touch listener to use for in-layout UI controls to delay hiding the
+   * system UI. This is to prevent the jarring behavior of controls going away
+   * while interacting with activity UI.
+   */
+  private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
+    @Override public boolean onTouch(View view, MotionEvent motionEvent) {
+      if (AUTO_HIDE) {
+        delayedHide(AUTO_HIDE_DELAY_MILLIS);
+      }
+      return false;
     }
   };
 
@@ -124,7 +124,7 @@ public class WelcomeActivity extends BaseActivity {
       // 未曾录入密码
       startActivity(new Intent(WelcomeActivity.this, SettingPasswordActivity.class));
     } else {
-      startActivity(new Intent(WelcomeActivity.this, AccountingActivity.class));
+      startActivity(new Intent(WelcomeActivity.this, AccountingPagerActivity.class));
     }
     WelcomeActivity.this.finish();
   }

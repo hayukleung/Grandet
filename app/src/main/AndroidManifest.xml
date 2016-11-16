@@ -21,7 +21,8 @@
       </intent-filter>
     </activity>
     <activity android:name=".ui.SettingPasswordActivity"/>
-    <activity android:name=".ui.AccountingActivity"/>
+    <activity android:name=".ui.AccountingPagerActivity"/>
+    <activity android:name=".ui.GuardActivity"/>
   </application>
 
 </manifest>

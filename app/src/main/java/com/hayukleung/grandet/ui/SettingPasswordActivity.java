@@ -59,7 +59,8 @@ public class SettingPasswordActivity extends BaseActivity {
               pwd.setPassword(password);
               getDatabase().insert(pwd);
               // 跳转主界面
-              startActivity(new Intent(SettingPasswordActivity.this, AccountingActivity.class));
+              startActivity(
+                  new Intent(SettingPasswordActivity.this, AccountingPagerActivity.class));
               SettingPasswordActivity.this.finish();
             } else {
               // 两次密码不一致

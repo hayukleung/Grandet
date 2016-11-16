@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    >
+
+  <TextView
+      android:id="@+id/account"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="@dimen/padding_top"
+      android:gravity="center"
+      android:maxLines="1"
+      android:text="xxx"
+      android:textSize="48sp"
+      />
+
+  <RadioGroup
+      android:id="@+id/radio_group"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/account"
+      android:layout_centerHorizontal="true"
+      android:orientation="horizontal"
+      >
+    <RadioButton
+        android:id="@+id/outcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/record_outcome"
+        />
+    <RadioButton
+        android:id="@+id/income"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/record_income"
+        />
+  </RadioGroup>
+
+  <android.support.v7.widget.RecyclerView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@id/keyboard"
+      android:layout_below="@+id/radio_group"
+      />
+
+  <com.hayukleung.grandet.ui.view.Keyboard
+      android:id="@+id/keyboard"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_gravity="bottom"
+      android:background="@android:color/white"
+      />
+</RelativeLayout>

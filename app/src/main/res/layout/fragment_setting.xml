@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    >
+
+  <TextView
+      android:id="@+id/modify_pin_code"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/bg_item"
+      android:gravity="center"
+      android:paddingBottom="10dp"
+      android:paddingTop="@dimen/padding_top"
+      android:text="@string/setting_modify_pin_code"
+      android:textSize="18sp"
+      />
+</RelativeLayout>

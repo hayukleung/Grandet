@@ -66,6 +66,11 @@ public class Keyboard extends View implements Key {
     return result;
   }
 
+  public void refresh() {
+    mCurrentKey = KEY_INVALID;
+    invalidate();
+  }
+
   public void setKeyboardHelper(KeyboardHelper keyboardHelper) {
     mKeyboardHelper = keyboardHelper;
   }
