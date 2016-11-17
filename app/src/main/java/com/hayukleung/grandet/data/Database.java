@@ -52,10 +52,12 @@ public class Database extends SQL {
 
     @Override public void onCreate(SQLiteDatabase db) {
       db.execSQL(sqlPasswordCreate.toString());
+      db.execSQL(sqlRecordCreate.toString());
     }
 
     @Override public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
       db.execSQL(sqlPasswordDrop.toString());
+      db.execSQL(sqlRecordDrop.toString());
       onCreate(db);
     }
   }

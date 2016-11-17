@@ -8,8 +8,6 @@ import android.graphics.RectF;
 import android.os.Build;
 import android.support.annotation.UiThread;
 import android.util.AttributeSet;
-import android.view.View;
-import java.util.Stack;
 
 /**
  * Grandet
@@ -23,7 +21,7 @@ import java.util.Stack;
 /**
  * PIN Code 输入框
  */
-public class Password extends View implements Key {
+public class Password extends KeyboardPlug {
 
   private int mUnitSize;
   private Paint mPaint;
@@ -32,7 +30,6 @@ public class Password extends View implements Key {
   private RectF mRectF3;
   private RectF mRectF4;
 
-  private Stack<String> mPassword = new Stack<>();
   private PasswordHelper mPasswordHelper;
 
   public Password(Context context) {
@@ -76,7 +73,7 @@ public class Password extends View implements Key {
    * 清除密码
    */
   public void clear() {
-    mPassword.clear();
+    getContentStack().clear();
     invalidate();
   }
 
@@ -145,7 +142,7 @@ public class Password extends View implements Key {
     mPaint.setColor(Color.argb(0xff, 0x00, 0x00, 0x00));
     mPaint.setStyle(Paint.Style.FILL);
 
-    switch (mPassword.size()) {
+    switch (getContentStack().size()) {
       case 0: {
         break;
       }
@@ -177,84 +174,72 @@ public class Password extends View implements Key {
     }
   }
 
-  public void acceptCode(int key) {
+  @Override protected int getLimit() {
+    return 4;
+  }
 
-    if (4 == mPassword.size()) {
-      return;
-    }
+  @Override protected void acceptKey0() {
+    getContentStack().push("0");
+  }
 
-    switch (key) {
-      case KEY_0: {
-        mPassword.push("0");
-        break;
-      }
-      case KEY_1: {
-        mPassword.push("1");
-        break;
-      }
-      case KEY_2: {
-        mPassword.push("2");
-        break;
-      }
-      case KEY_3: {
-        mPassword.push("3");
-        break;
-      }
-      case KEY_4: {
-        mPassword.push("4");
-        break;
-      }
-      case KEY_5: {
-        mPassword.push("5");
-        break;
-      }
-      case KEY_6: {
-        mPassword.push("6");
-        break;
-      }
-      case KEY_7: {
-        mPassword.push("7");
-        break;
-      }
-      case KEY_8: {
-        mPassword.push("8");
-        break;
-      }
-      case KEY_9: {
-        mPassword.push("9");
-        break;
-      }
-      case KEY_DOT: {
-        break;
-      }
-      case KEY_DEL: {
-        if (0 < mPassword.size()) {
-          mPassword.pop();
-        }
-        break;
-      }
-      case KEY_ENTER: {
-        break;
-      }
-      case KEY_INVALID:
-      default: {
+  @Override protected void acceptKey1() {
+    getContentStack().push("1");
+  }
 
-        break;
-      }
-    }
+  @Override protected void acceptKey2() {
+    getContentStack().push("2");
+  }
 
+  @Override protected void acceptKey3() {
+    getContentStack().push("3");
+  }
+
+  @Override protected void acceptKey4() {
+    getContentStack().push("4");
+  }
+
+  @Override protected void acceptKey5() {
+    getContentStack().push("5");
+  }
+
+  @Override protected void acceptKey6() {
+    getContentStack().push("6");
+  }
+
+  @Override protected void acceptKey7() {
+    getContentStack().push("7");
+  }
+
+  @Override protected void acceptKey8() {
+    getContentStack().push("8");
+  }
+
+  @Override protected void acceptKey9() {
+    getContentStack().push("9");
+  }
+
+  @Override protected void acceptKeyDot() {
+  }
+
+  @Override protected void acceptKeyDel() {
+  }
+
+  @Override protected void acceptKeyEnter() {
+  }
+
+  @Override protected void acceptSuccessfully() {
     invalidate();
 
     postDelayed(new Runnable() {
       @Override public void run() {
-        if (4 == mPassword.size()) {
+        if (getLimit() == getContentStack().size()) {
           // 密码录入完成
           if (null != mPasswordHelper) {
 
-            String p4 = mPassword.pop();
-            String p3 = mPassword.pop();
-            String p2 = mPassword.pop();
-            String p1 = mPassword.pop();
+            String p4 = getContentStack().pop();
+            String p3 = getContentStack().pop();
+            String p2 = getContentStack().pop();
+            String p1 = getContentStack().pop();
 
             mPasswordHelper.onPasswordTyped(p1 + p2 + p3 + p4);
           }
@@ -273,7 +258,7 @@ public class Password extends View implements Key {
     return (int) (valueDp * getResources().getDisplayMetrics().density + 0.5f);
   }
 
-  public static interface PasswordHelper {
+  public interface PasswordHelper {
     @UiThread void onPasswordTyped(String password);
   }
 }

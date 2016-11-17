@@ -11,19 +11,19 @@ package com.hayukleung.grandet.ui.view;
 
 public interface Key {
 
-  public static final int KEY_INVALID = -1;
+  int KEY_INVALID = -1;
 
-  public static final int KEY_0 = 0;
-  public static final int KEY_1 = 1;
-  public static final int KEY_2 = 2;
-  public static final int KEY_3 = 3;
-  public static final int KEY_4 = 4;
-  public static final int KEY_5 = 5;
-  public static final int KEY_6 = 6;
-  public static final int KEY_7 = 7;
-  public static final int KEY_8 = 8;
-  public static final int KEY_9 = 9;
-  public static final int KEY_DOT = 10;
-  public static final int KEY_DEL = 11;
-  public static final int KEY_ENTER = 12;
+  int KEY_0 = 0;
+  int KEY_1 = 1;
+  int KEY_2 = 2;
+  int KEY_3 = 3;
+  int KEY_4 = 4;
+  int KEY_5 = 5;
+  int KEY_6 = 6;
+  int KEY_7 = 7;
+  int KEY_8 = 8;
+  int KEY_9 = 9;
+  int KEY_DOT = 10;
+  int KEY_DEL = 11;
+  int KEY_ENTER = 12;
 }

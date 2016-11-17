@@ -19,11 +19,35 @@ public class Record extends BaseBean {
    */
   private long timestamp;
   /**
-   * 支出|收入
-   */
-  private int type;
-  /**
    * 归类
    */
   private int category;
+  /**
+   * 金额
+   */
+  private double account;
+
+  public long getTimestamp() {
+    return timestamp;
+  }
+
+  public void setTimestamp(long timestamp) {
+    this.timestamp = timestamp;
+  }
+
+  public int getCategory() {
+    return category;
+  }
+
+  public void setCategory(int category) {
+    this.category = category;
+  }
+
+  public double getAccount() {
+    return account;
+  }
+
+  public void setAccount(double account) {
+    this.account = account;
+  }
 }
