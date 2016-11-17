@@ -2,7 +2,6 @@ package com.hayukleung.grandet.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,7 +26,7 @@ import java.util.List;
  * at 2016-11-16 16:57
  */
 
-public class RecordFragment extends Fragment {
+public class RecordFragment extends BaseFragment {
 
   private Keyboard mKeyboard;
   private AccountTextView mAccountTextView;
@@ -61,12 +60,14 @@ public class RecordFragment extends Fragment {
           mCategoryList.clear();
           mCategoryList.addAll(Config.LIST_OUTCOME);
           mRecyclerView.getAdapter().notifyDataSetChanged();
+          mAccountTextView.setHint(R.string.record_account_hint_outcome);
           return;
         }
         if (checkedId == mIncome.getId()) {
           mCategoryList.clear();
           mCategoryList.addAll(Config.LIST_INCOME);
           mRecyclerView.getAdapter().notifyDataSetChanged();
+          mAccountTextView.setHint(R.string.record_account_hint_income);
           return;
         }
       }

@@ -1,5 +1,6 @@
 package com.hayukleung.grandet.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -36,8 +37,9 @@ public class SettingFragment extends BaseFragment {
   @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
     switch (requestCode) {
       case 0x0001: {
-        startActivity(new Intent(getActivity(), SettingPasswordActivity.class));
-        getActivity().finish();
+        if (Activity.RESULT_OK == resultCode) {
+          startActivity(new Intent(getActivity(), SettingPasswordActivity.class));
+        }
         break;
       }
     }

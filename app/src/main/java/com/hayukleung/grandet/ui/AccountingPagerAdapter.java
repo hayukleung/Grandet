@@ -13,9 +13,9 @@ import android.support.v4.app.FragmentPagerAdapter;
  * at 2016-11-16 16:53
  */
 
-public class AccountingPagerAdapter extends FragmentPagerAdapter {
+class AccountingPagerAdapter extends FragmentPagerAdapter {
 
-  public AccountingPagerAdapter(FragmentManager fm) {
+  AccountingPagerAdapter(FragmentManager fm) {
     super(fm);
   }
 

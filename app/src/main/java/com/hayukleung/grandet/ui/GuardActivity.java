@@ -36,6 +36,7 @@ public class GuardActivity extends BaseActivity {
       @Override public void onPasswordTyped(String password) {
         Log.e(GuardActivity.class.getSimpleName(), "password --> " + password);
         if (getDatabase().queryPassword().getPassword().equals(password)) {
+          setResult(RESULT_OK);
           GuardActivity.this.finish();
         } else {
           mHint.setText(R.string.pin_code_error);
@@ -53,5 +54,7 @@ public class GuardActivity extends BaseActivity {
   }
 
   @Override public void onBackPressed() {
+    setResult(RESULT_CANCELED);
+    GuardActivity.this.finish();
   }
 }
