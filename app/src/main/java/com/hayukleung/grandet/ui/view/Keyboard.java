@@ -33,7 +33,14 @@ public class Keyboard extends View implements Key {
 
   private Vibrator mVibrator;
 
-  private boolean mLongClick = false;
+  /**
+   * 是否可以长按
+   */
+  private boolean mLongClickable = false;
+  /**
+   * 是否捕获了长按事件
+   */
+  private boolean mLongClicked = false;
 
   public Keyboard(Context context) {
     this(context, null);
@@ -255,34 +262,41 @@ public class Keyboard extends View implements Key {
         invalidate();
 
         if (KEY_DEL == mCurrentKey) {
-          mLongClick = true;
+          mLongClickable = true;
           postDelayed(new Runnable() {
             @Override public void run() {
-              if (KEY_DEL == mCurrentKey && mLongClick) {
-                mLongClick = false;
+              if (KEY_DEL == mCurrentKey && mLongClickable) {
+                // 长按事件生效
+                mLongClickable = false;
                 mCurrentKey = KEY_DEL_LONG;
                 vibrate();
                 mKeyboardHelper.onKeySure(mCurrentKey);
+                mLongClicked = true;
               }
             }
-          }, 500);
+          }, 600);
         }
         break;
       }
       case MotionEvent.ACTION_MOVE: {
         if (mCurrentKey != getCurrentKey(event)) {
-          mLongClick = false;
+          mLongClickable = false;
         }
         mCurrentKey = getCurrentKey(event);
         invalidate();
         break;
       }
       case MotionEvent.ACTION_UP: {
-        mLongClick = false;
+        mLongClickable = false;
         if (null != mKeyboardHelper) {
           if (KEY_DEL_LONG == mCurrentKey) {
           } else {
-            mKeyboardHelper.onKeySure(getCurrentKey(event));
+            if (mLongClicked) {
+              mLongClicked = false;
+            } else {
+              vibrate();
+              mKeyboardHelper.onKeySure(getCurrentKey(event));
+            }
           }
         }
         mCurrentKey = KEY_INVALID;

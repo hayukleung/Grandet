@@ -15,6 +15,12 @@
   <string name="record_income">收入</string>
   <string name="record_outcome">支出</string>
 
+  <!--permission-->
+  <string name="settings">设置</string>
+  <string name="help">帮助</string>
+  <string name="string_help_text">Grandet请求获取设备震动权限</string>
+  <string name="quit">放弃授权</string>
+
   <string name="dummy_button">Dummy Button</string>
   <string name="dummy_content">DUMMY\nCONTENT</string>
 
