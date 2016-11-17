@@ -21,7 +21,7 @@ import android.util.AttributeSet;
 /**
  * PIN Code 输入框
  */
-public class Password extends KeyboardPlug {
+public class Password extends KeyboardView {
 
   private int mUnitSize;
   private Paint mPaint;
@@ -174,60 +174,67 @@ public class Password extends KeyboardPlug {
     }
   }
 
-  @Override protected int getLimit() {
+  @Override public int getLimit() {
     return 4;
   }
 
-  @Override protected void acceptKey0() {
+  @Override public boolean acceptKeySkip() {
+    return 0 < getLimit() && getLimit() == getContentStack().size();
+  }
+
+  @Override public void acceptKey0() {
     getContentStack().push("0");
   }
 
-  @Override protected void acceptKey1() {
+  @Override public void acceptKey1() {
     getContentStack().push("1");
   }
 
-  @Override protected void acceptKey2() {
+  @Override public void acceptKey2() {
     getContentStack().push("2");
   }
 
-  @Override protected void acceptKey3() {
+  @Override public void acceptKey3() {
     getContentStack().push("3");
   }
 
-  @Override protected void acceptKey4() {
+  @Override public void acceptKey4() {
     getContentStack().push("4");
   }
 
-  @Override protected void acceptKey5() {
+  @Override public void acceptKey5() {
     getContentStack().push("5");
   }
 
-  @Override protected void acceptKey6() {
+  @Override public void acceptKey6() {
     getContentStack().push("6");
   }
 
-  @Override protected void acceptKey7() {
+  @Override public void acceptKey7() {
     getContentStack().push("7");
   }
 
-  @Override protected void acceptKey8() {
+  @Override public void acceptKey8() {
     getContentStack().push("8");
   }
 
-  @Override protected void acceptKey9() {
+  @Override public void acceptKey9() {
     getContentStack().push("9");
   }
 
-  @Override protected void acceptKeyDot() {
+  @Override public void acceptKeyDot() {
   }
 
-  @Override protected void acceptKeyDel() {
+  @Override public void acceptKeyDel() {
   }
 
-  @Override protected void acceptKeyEnter() {
+  @Override public void acceptKeyDelLong() {
   }
 
-  @Override protected void acceptSuccessfully() {
+  @Override public void acceptKeyEnter() {
+  }
+
+  @Override public void acceptSuccessfully() {
     invalidate();
 
     postDelayed(new Runnable() {

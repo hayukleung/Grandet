@@ -5,15 +5,14 @@
     android:background="@android:color/background_light"
     >
 
-  <TextView
-      android:id="@+id/account"
+  <com.hayukleung.grandet.ui.view.AccountTextView
+      android:id="@+id/account_text_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerHorizontal="true"
       android:layout_marginTop="@dimen/padding_top"
       android:gravity="center"
       android:maxLines="1"
-      android:text="xxx"
       android:textSize="48sp"
       />
 
@@ -21,7 +20,7 @@
       android:id="@+id/radio_group"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_below="@+id/account"
+      android:layout_below="@+id/account_text_view"
       android:layout_centerHorizontal="true"
       android:orientation="horizontal"
       >

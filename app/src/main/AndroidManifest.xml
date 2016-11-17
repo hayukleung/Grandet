@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hayukleung.grandet">
 
+  <uses-permission android:name="android.permission.VIBRATE"/>
+
   <application
       android:name=".XApplication"
       android:allowBackup="true"

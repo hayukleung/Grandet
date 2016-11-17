@@ -9,7 +9,7 @@ package com.hayukleung.grandet.ui.view;
  * at 2016-11-16 14:14
  */
 
-public interface Key {
+interface Key {
 
   int KEY_INVALID = -1;
 
@@ -25,5 +25,6 @@ public interface Key {
   int KEY_9 = 9;
   int KEY_DOT = 10;
   int KEY_DEL = 11;
-  int KEY_ENTER = 12;
+  int KEY_DEL_LONG = 12;
+  int KEY_ENTER = 13;
 }

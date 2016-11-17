@@ -1,10 +1,12 @@
 package com.hayukleung.grandet.ui.view;
 
+import android.app.Service;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,6 +30,10 @@ public class Keyboard extends View implements Key {
   private int mCurrentKey = KEY_INVALID;
 
   private KeyboardHelper mKeyboardHelper;
+
+  private Vibrator mVibrator;
+
+  private boolean mLongClick = false;
 
   public Keyboard(Context context) {
     this(context, null);
@@ -76,6 +82,13 @@ public class Keyboard extends View implements Key {
   }
 
   private void init() {
+  }
+
+  private void vibrate() {
+    if (null == mVibrator) {
+      mVibrator = (Vibrator) getContext().getSystemService(Service.VIBRATOR_SERVICE);
+    }
+    mVibrator.vibrate(20);
   }
 
   @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -236,15 +249,41 @@ public class Keyboard extends View implements Key {
   @Override public boolean onTouchEvent(MotionEvent event) {
 
     switch (event.getAction()) {
-      case MotionEvent.ACTION_DOWN:
+      case MotionEvent.ACTION_DOWN: {
+
+        mCurrentKey = getCurrentKey(event);
+        invalidate();
+
+        if (KEY_DEL == mCurrentKey) {
+          mLongClick = true;
+          postDelayed(new Runnable() {
+            @Override public void run() {
+              if (KEY_DEL == mCurrentKey && mLongClick) {
+                mLongClick = false;
+                mCurrentKey = KEY_DEL_LONG;
+                vibrate();
+                mKeyboardHelper.onKeySure(mCurrentKey);
+              }
+            }
+          }, 500);
+        }
+        break;
+      }
       case MotionEvent.ACTION_MOVE: {
+        if (mCurrentKey != getCurrentKey(event)) {
+          mLongClick = false;
+        }
         mCurrentKey = getCurrentKey(event);
         invalidate();
         break;
       }
       case MotionEvent.ACTION_UP: {
+        mLongClick = false;
         if (null != mKeyboardHelper) {
-          mKeyboardHelper.onKeySure(getCurrentKey(event));
+          if (KEY_DEL_LONG == mCurrentKey) {
+          } else {
+            mKeyboardHelper.onKeySure(getCurrentKey(event));
+          }
         }
         mCurrentKey = KEY_INVALID;
         invalidate();
@@ -384,7 +423,7 @@ public class Keyboard extends View implements Key {
     return (int) (valueSp * getResources().getDisplayMetrics().scaledDensity + 0.5f);
   }
 
-  public static interface KeyboardHelper {
+  public interface KeyboardHelper {
     void onKeySure(int key);
   }
 }

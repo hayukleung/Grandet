@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.hayukleung.grandet.R;
+import com.hayukleung.grandet.ui.view.AccountTextView;
 import com.hayukleung.grandet.ui.view.Keyboard;
 
 /**
@@ -21,6 +22,7 @@ import com.hayukleung.grandet.ui.view.Keyboard;
 public class RecordFragment extends Fragment {
 
   private Keyboard mKeyboard;
+  private AccountTextView mAccountTextView;
 
   public void refreshKeyboard() {
     mKeyboard.refresh();
@@ -33,10 +35,11 @@ public class RecordFragment extends Fragment {
   }
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    mAccountTextView = (AccountTextView) view.findViewById(R.id.account_text_view);
     mKeyboard = (Keyboard) view.findViewById(R.id.keyboard);
     mKeyboard.setKeyboardHelper(new Keyboard.KeyboardHelper() {
       @Override public void onKeySure(int key) {
-        // TODO
+        mAccountTextView.acceptCode(key);
       }
     });
   }

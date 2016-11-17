@@ -14,58 +14,26 @@ import java.util.Stack;
  * at 2016-11-17 10:50
  */
 
-public abstract class KeyboardPlug extends View implements Key {
+/**
+ * 键盘接收插口
+ */
+public abstract class KeyboardView extends View implements IKeyboard {
 
   private Stack<String> mContentStack = new Stack<>();
 
-  public KeyboardPlug(Context context) {
+  public KeyboardView(Context context) {
     super(context);
   }
 
-  public KeyboardPlug(Context context, AttributeSet attrs) {
+  public KeyboardView(Context context, AttributeSet attrs) {
     super(context, attrs);
   }
 
-  public KeyboardPlug(Context context, AttributeSet attrs, int defStyleAttr) {
+  public KeyboardView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
   }
 
-  protected abstract void acceptKey0();
-
-  protected abstract void acceptKey1();
-
-  protected abstract void acceptKey2();
-
-  protected abstract void acceptKey3();
-
-  protected abstract void acceptKey4();
-
-  protected abstract void acceptKey5();
-
-  protected abstract void acceptKey6();
-
-  protected abstract void acceptKey7();
-
-  protected abstract void acceptKey8();
-
-  protected abstract void acceptKey9();
-
-  protected abstract void acceptKeyDot();
-
-  protected abstract void acceptKeyDel();
-
-  protected abstract void acceptKeyEnter();
-
-  protected abstract void acceptSuccessfully();
-
-  /**
-   * 小于等于0表示对输入字数无限制
-   *
-   * @return
-   */
-  protected abstract int getLimit();
-
-  protected Stack<String> getContentStack() {
+  @Override public Stack<String> getContentStack() {
     return mContentStack;
   }
 
@@ -74,9 +42,9 @@ public abstract class KeyboardPlug extends View implements Key {
    *
    * @param key
    */
-  public void acceptCode(int key) {
+  @Override public void acceptCode(int key) {
 
-    if (0 < getLimit() && getLimit() == mContentStack.size()) {
+    if (acceptKeySkip()) {
       return;
     }
 
@@ -129,6 +97,10 @@ public abstract class KeyboardPlug extends View implements Key {
         if (0 < mContentStack.size()) {
           mContentStack.pop();
         }
+        break;
+      }
+      case KEY_DEL_LONG: {
+        mContentStack.clear();
         break;
       }
       case KEY_ENTER: {
